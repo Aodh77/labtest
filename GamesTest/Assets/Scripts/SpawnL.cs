@@ -9,7 +9,7 @@ public class SpawnL : MonoBehaviour
     public int LightNum = 10;
     public float offset = 3f;
     public GameObject TrafficLight;
-    public GameObject Ship;
+    public GameObject Ship1;
     
     
 
@@ -17,7 +17,7 @@ public class SpawnL : MonoBehaviour
     void Start()
     {
         CreateCircle();
-        GameObject ship = Instantiate(Ship); 
+        GameObject ship1 = Instantiate(Ship1); 
     }
 
     void CreateCircle()
