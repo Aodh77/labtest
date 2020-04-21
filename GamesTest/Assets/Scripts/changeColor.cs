@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class changeColor : MonoBehaviour
 {
-    // Start is called before the first frame update
+    int id;
+    Color[] colors = new Color[3];
     void Start()
     {
-        int id;
+        
 
-        Color[] colors = new Color[3];
+        
 
         colors[0] = Color.green;
         colors[1] = Color.yellow;
@@ -36,11 +37,53 @@ public class changeColor : MonoBehaviour
         {
             Debug.Log(id);
         }
+
+        StartCoroutine(ColorChange());
     }
 
-    // Update is called once per frame
-    void Update()
+    
+    void NewColor()
     {
-        
+        if (id == 0)
+        {
+            this.GetComponent<Renderer>().material.color = colors[1];
+            this.gameObject.tag = "yellow";
+            id = 1;
+        }
+        if (id == 1)
+        {
+            this.GetComponent<Renderer>().material.color = colors[1];
+            this.gameObject.tag = "red";
+            id = 2;
+        }
+        if (id == 2)
+        {
+            this.GetComponent<Renderer>().material.color = colors[1];
+            this.gameObject.tag = "target";
+            id = 0;
+        }
+    }
+
+    IEnumerator ColorChange()
+    {
+        int t;
+        if (id == 0)
+        {
+            t = Random.Range(5, 10);
+            yield return new WaitForSeconds(t);
+            NewColor();
+        }
+        if (id == 1)
+        {
+            yield return new WaitForSeconds(4);
+            NewColor();
+        }
+        if (id == 2)
+        {
+            t = Random.Range(5, 10);
+            yield return new WaitForSeconds(t);
+            NewColor();
+        }
+        StartCoroutine(ColorChange());
     }
 }
