@@ -7,7 +7,9 @@ public class SpawnL : MonoBehaviour
 {
     
     public int LightNum = 10;
+    public float offset = 3f;
     public GameObject TrafficLight;
+    public GameObject Ship;
     
     
 
@@ -15,6 +17,7 @@ public class SpawnL : MonoBehaviour
     void Start()
     {
         CreateCircle();
+        GameObject ship = Instantiate(Ship); 
     }
 
     void CreateCircle()
@@ -27,8 +30,8 @@ public class SpawnL : MonoBehaviour
 
             float angle = i * (Mathf.PI * 2 / LightNum);
 
-            float x = Mathf.Cos(angle) * 3f;
-            float Y = Mathf.Sin(angle) * 3f;
+            float x = Mathf.Cos(angle) * offset;
+            float Y = Mathf.Sin(angle) * offset;
 
             targetPosition = new Vector3(targetPosition.x + x, targetPosition.y + Y , 0);
 
