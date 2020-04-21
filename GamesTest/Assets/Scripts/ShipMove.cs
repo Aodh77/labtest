@@ -20,8 +20,9 @@ public class ShipMove : MonoBehaviour
     public bool arriveEnabled = false;
 
     public GameObject target;
+    public GameObject newTarget;
     public Vector3 targetPos;
-    public Transform targetTransform;
+    
 
     public float banking = 0.1f;
     public float damping = 0.1f;
@@ -49,6 +50,8 @@ public class ShipMove : MonoBehaviour
             //transform.forward = velocity;
             velocity -= (damping * velocity * Time.deltaTime);
         }
+       target = CheckTarget();
+       targetPos = target.transform.position;
     }
 
     public GameObject FindTarget()
@@ -66,6 +69,23 @@ public class ShipMove : MonoBehaviour
         }
         return randTarget;
 
+    }
+
+    public GameObject CheckTarget()
+    {
+        GameObject currentTarget = target;
+
+        if(currentTarget.gameObject.tag == "target")
+        {
+            
+        }
+        else
+        {
+            newTarget = FindTarget();
+            currentTarget = newTarget;
+            Debug.Log("switched");
+        }
+        return currentTarget;
     }
 
     public Vector3 CalculateForce()
@@ -106,9 +126,10 @@ public class ShipMove : MonoBehaviour
     {
         if (other.gameObject == target)
         {
-            Debug.Log("hi");
+            
             target = FindTarget();
             targetPos = target.transform.position;
+
         }
     }
 }

@@ -8,17 +8,17 @@ public class changeColor : MonoBehaviour
     Color[] colors = new Color[3];
     void Start()
     {
-        
 
-        
+
+
 
         colors[0] = Color.green;
         colors[1] = Color.yellow;
         colors[2] = Color.red;
 
-        id = Random.Range(0, 3); 
+        id = Random.Range(0, 3);
 
-        if (id == 0 )
+        if (id == 0)
         {
             this.GetComponent<Renderer>().material.color = colors[0];
             this.gameObject.tag = "target";
@@ -33,34 +33,35 @@ public class changeColor : MonoBehaviour
             this.GetComponent<Renderer>().material.color = colors[2];
             this.gameObject.tag = "red";
         }
-        else
-        {
-            Debug.Log(id);
-        }
+       
 
         StartCoroutine(ColorChange());
     }
 
-    
-    void NewColor()
+
+
+
+    void NewColor(int cid)
     {
-        if (id == 0)
+        if (cid == 0)
         {
             this.GetComponent<Renderer>().material.color = colors[1];
             this.gameObject.tag = "yellow";
             id = 1;
+            Debug.Log("change from green");
         }
-        if (id == 1)
+        if (cid == 1)
         {
-            this.GetComponent<Renderer>().material.color = colors[1];
+            this.GetComponent<Renderer>().material.color = colors[2];
             this.gameObject.tag = "red";
             id = 2;
         }
-        if (id == 2)
+        if (cid == 2)
         {
-            this.GetComponent<Renderer>().material.color = colors[1];
+            this.GetComponent<Renderer>().material.color = colors[0];
             this.gameObject.tag = "target";
             id = 0;
+            Debug.Log("change to green");
         }
     }
 
@@ -71,18 +72,19 @@ public class changeColor : MonoBehaviour
         {
             t = Random.Range(5, 10);
             yield return new WaitForSeconds(t);
-            NewColor();
+            NewColor(id);
+            //Debug.Log("change from green");
         }
         if (id == 1)
         {
             yield return new WaitForSeconds(4);
-            NewColor();
+            NewColor(id);
         }
         if (id == 2)
         {
             t = Random.Range(5, 10);
             yield return new WaitForSeconds(t);
-            NewColor();
+            NewColor(id);
         }
         StartCoroutine(ColorChange());
     }
